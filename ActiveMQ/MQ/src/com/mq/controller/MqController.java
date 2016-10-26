@@ -1,35 +1,45 @@
 package com.mq.controller;
 
-import javax.jms.Destination;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mq.service.MqService;
 
+/**
+ * MQController
+ * @author yyf
+ *
+ */
 @Controller
-@RequestMapping("jms")
+@RequestMapping("activeMQ")
 public class MqController {
-
-	@Autowired
-	@Qualifier("queueDestination")
-	private Destination destination;
-	
 	@Autowired
 	private MqService mqService;
-	@RequestMapping("/mq2")
-	public void a() {
-		System.out.println("come");
-	}
 
+	/**
+	 * 测试向MQ发送消息
+	 * 地址：localhost:8080/jms/ma.do
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/mq")
 	public @ResponseBody String testSend() throws Exception {
-		String mss ="中文";
-		System.out.println(mss);
-		mqService.sendMessage(destination,mss);
+		mqService.testSend();
+		return "jms exute complete";
+	}
+	
+	
+	/**
+	 * 测试向MQ发送消息
+	 * 地址：localhost:8080/jms/ma.do
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/topic")
+	public @ResponseBody String testSendTopic() throws Exception {
+		mqService.testSendTopic();
 		return "jms exute complete";
 	}
 }

@@ -25,34 +25,77 @@
 
 
 	<!-- MQ strat -->
-
+	<!--ActiveMQ连接 url(内外网) 账号密码在此配置(可不写 则为默认 )-->
 	<bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL" value="tcp://localhost:61616" />
+		 <property name="userName" value="admin" />
+       	 <property name="password" value="admin" />
 	</bean>
+	<!-- JMS连接工厂 -->
 	<bean id="connectionFactory"
 		class="org.springframework.jms.connection.SingleConnectionFactory">
-		<!-- 目标ConnectionFactory对应真实的可以产生JMS Connection的ConnectionFactory -->
 		<property name="targetConnectionFactory" ref="targetConnectionFactory" />
 	</bean>
+	
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory" />
 	</bean>
 
-	<!--队列目的地 -->
+	<!--消息队列-->
 	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg>
-			<value>queue</value> <!--  -->
+			<!-- MQ队列名 -->
+			<value>queue</value> 
 		</constructor-arg>
 	</bean>
+	
 	<!-- 消息监听器 -->
 	<bean id="consumerMessageListener" class="com.mq.listener.ConsumerMessageListener" />
-	<!-- 消息监听容器 -->
-	<bean id="jmsContainer"
-		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+	<!--  消息监听容器 -->
+	<bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="queueDestination" />
-		<property name="messageListener" ref="consumerMessageListener" />
+		<property name="messageListener" ref="consumerMessageListener" /> 
+		<property name="concurrentConsumers" value="1"/> <!-- Lister并行数量 -->
 	</bean>
+	
+	
+	<!-- 订阅模式 -->
+	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+       <constructor-arg>
+           <value>topic</value>
+       </constructor-arg>
+   </bean>
+   <bean id="jmsTemplateTopic" class="org.springframework.jms.core.JmsTemplate">
+       <property name="connectionFactory" ref="connectionFactory" />
+       <property name="defaultDestination" ref="topicDestination" />
+       <!-- 订阅发布模式 -->
+       <property name="pubSubDomain" value="true"/>
+   </bean>
+	
+	<!-- 消息主题监听者 和 主题监听容器 可以配置多个，即多个订阅者 -->
+   <bean id="topicMessageListenerOne" class="com.mq.listener.TopicMessageListenerOne" />
+   <bean id="topicMessageListenerTwo" class="com.mq.listener.TopicMessageListenerTwo" />
+ 
+   <!-- Topic接收监听（Topic）Topic的第1个监听者 -->
+   <bean id="topicJmsContainer"
+         class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+       <property name="connectionFactory" ref="connectionFactory" />
+       <property name="destination" ref="topicDestination" />
+       <property name="messageListener" ref="topicMessageListenerOne" />
+       <property name="concurrentConsumers" value="1"/> <!-- Lister并行数量 -->
+   </bean>
+ 
+   <!-- Topic接收监听（Topic）Topic的第2个监听者-->
+   <bean id="topicJmsContainerTwo"
+         class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+       <property name="connectionFactory" ref="connectionFactory" />
+       <property name="destination" ref="topicDestination" />
+       <property name="messageListener" ref="topicMessageListenerTwo" />
+       <property name="concurrentConsumers" value="1"/> <!-- Lister并行数量 -->
+   </bean>
+   <!--  Topic模式  End -->
+	
 
 	<!-- MQ end-->
 </beans>	

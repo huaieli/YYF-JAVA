@@ -25,7 +25,6 @@
 	<!-- 引入方法一 -->
 	<context:property-placeholder location="classpath:jdbc-demo.properties" />
 
-
 	<!-- 扫描注解@Controller的类 -->
 	<!--
 		使用annotation
