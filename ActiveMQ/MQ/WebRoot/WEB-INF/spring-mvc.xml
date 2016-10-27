@@ -6,15 +6,13 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
+	
+
+	<!--  <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />-->
+
+	<!-- 自动扫描注解了的文件  并且只能在com.framework下面扫描-->
+	<context:component-scan base-package="com.mq"/>
 	<!-- 启用注解 -->
-	<context:annotation-config />
-
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
-
-	<!-- 自动扫描注解了的文件  并且只能在com.framework下面扫描 -->
-	<context:component-scan base-package="com.mq">
-	</context:component-scan>
 
 	<!-- 定义返回客户端视图(JSP)的位置 根据ACTION返回的字符串在VIEWS目录下进行查找 -->
 	<bean

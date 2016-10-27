@@ -32,7 +32,7 @@ public class MqService extends BaseService {
 	 * 发送消息
 	 */
 	public void testSend() {
-		for (int i = 1; i <= 50; i++) {
+		for (int i = 1; i <= 4; i++) {
 			String mss = "发送信息:" + i;
 			System.out.println(mss);
 			try {
@@ -46,7 +46,7 @@ public class MqService extends BaseService {
 
 
 	public void testSendTopic() {
-		for (int i = 1; i <= 50; i++) {
+		for (int i = 99; i <101 ; i++) {
 			String mss = "发送信息:" + i+"00";
 			System.out.println(mss);
 			try {
@@ -54,7 +54,7 @@ public class MqService extends BaseService {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			sendMessage(topicDestination, mss);
+			sendTopic(topicDestination, mss);
 		}
 		
 	}

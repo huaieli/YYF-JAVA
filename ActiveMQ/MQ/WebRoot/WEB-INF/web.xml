@@ -4,27 +4,19 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
 	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-  <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
-  	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:/spring-mybatis.xml</param-value>
-	</context-param>
-  	<!-- 定义Servlet -->
-  	
+
 	<servlet>
-		<servlet-name>springServlet</servlet-name>
+		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
+		  <init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring-mvc.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>springServlet</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<servlet-name>spring</servlet-name>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
