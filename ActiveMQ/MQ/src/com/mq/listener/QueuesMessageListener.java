@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.mq.service.MqService;
 
 /**
- * jms监听
+ * JMS 队列模式(Queues)监听
  * 
  * @author yyf
  * 
  */
-public class ConsumerMessageListener implements MessageListener {
+public class QueuesMessageListener implements MessageListener {
 	@Autowired
 	private MqService mqService;
 
@@ -22,7 +22,7 @@ public class ConsumerMessageListener implements MessageListener {
 	 */
 	public void onMessage(Message message) {
 		try {
-			mqService.doLister(message);
+			mqService.doQueuesLister(message);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

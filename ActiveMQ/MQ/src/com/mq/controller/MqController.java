@@ -9,6 +9,7 @@ import com.mq.service.MqService;
 
 /**
  * MQController
+ * 控制层 用来调用业务来发送消息给MQ
  * @author yyf
  *
  */
@@ -19,21 +20,21 @@ public class MqController {
 	private MqService mqService;
 
 	/**
-	 * 测试向MQ发送消息
-	 * 地址：localhost:8080/jms/ma.do
+	 * 测试向MQ发送消息(Queus模式)
+	 * 地址：localhost:8080/MQ/jms/queues.do
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/mq")
-	public @ResponseBody String testSend() throws Exception {
-		mqService.testSend();
-		return "jms exute complete";
+	@RequestMapping("/queues")
+	public @ResponseBody String testSendQueues() throws Exception {
+		mqService.testSendQueues();
+		return "jms exute complete"; 
 	}
 	
 	
 	/**
-	 * 测试向MQ发送消息
-	 * 地址：localhost:8080/jms/ma.do
+	 * 测试向MQ发送消息(Topic模式)
+	 * 地址：localhost:8080/MQ/jms/topic.do
 	 * @return
 	 * @throws Exception
 	 */

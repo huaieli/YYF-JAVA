@@ -11,25 +11,26 @@ import org.springframework.jms.core.MessageCreator;
 
 /**
  * BaseService
+ * JMS 发送数据
  * @author yyf
  *
  */
 public class BaseService {
-	@Resource(name="jmsTemplate")
-    private JmsTemplate jmsTemplate;
+	@Resource(name="jmsTemplateQueues")
+    private JmsTemplate jmsTemplateQueues;
 	
 	
 	@Resource(name="jmsTemplateTopic")
     private JmsTemplate jmsTemplateTopic;
     
     /**
-     * jmsTemplate 发送消息
+     * 队列模式 (Queues)jmstemplate模板发送数据
      * 
      * @param destination
      * @param message
      */
     public void sendMessage(Destination destination, final String message) {
-    	jmsTemplate.send(destination, new MessageCreator() {
+    	jmsTemplateQueues.send(destination, new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
                 return session.createTextMessage(message);
             }
@@ -38,7 +39,7 @@ public class BaseService {
     
     
     /**
-     * jmsTemplate 发送消息
+     * 订阅模式 (Topic)jmstemplate模板发送数据
      * 
      * @param destination
      * @param message

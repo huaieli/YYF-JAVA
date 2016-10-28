@@ -35,11 +35,7 @@
 		<property name="targetConnectionFactory" ref="targetConnectionFactory" />
 	</bean>
 	
-	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-		<property name="connectionFactory" ref="connectionFactory" />
-	</bean>
-
-	<!--消息队列-->
+	<!--队列模式(Queues)-->
 	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg>
 			<!-- MQ队列名 -->
@@ -47,18 +43,25 @@
 		</constructor-arg>
 	</bean>
 	
+	<bean id="jmsTemplateQueues" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="queueDestination" />
+		<!--这里不配置pubSubDomain 则默认其为false  -->
+	</bean>
+
 	<!-- 消息监听器 -->
-	<bean id="consumerMessageListener" class="com.mq.listener.ConsumerMessageListener" />
+	<bean id="queuesMessageListener" class="com.mq.listener.QueuesMessageListener" />
 	<!--  消息监听容器 -->
 	<bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="queueDestination" />
-		<property name="messageListener" ref="consumerMessageListener" /> 
+		<property name="messageListener" ref="queuesMessageListener" /> 
 		<property name="concurrentConsumers" value="1"/> <!-- Lister并行数量 -->
 	</bean>
+	<!--Queues模式 End-->
 	
 	
-	<!-- 订阅模式 -->
+	<!-- 订阅模式(Topic) -->
 	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
        <constructor-arg>
            <value>topic</value>

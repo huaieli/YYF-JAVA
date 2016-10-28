@@ -7,6 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mq.service.MqService;
 
+/**
+ * JMS 订阅模式监听(Topic)
+ * 
+ * 由于订阅模式是可以多个消费 在此demo中设置了两个监听 此为第一个
+ * 
+ * @author yyf
+ *
+ */
 public class TopicMessageListenerOne implements MessageListener {
 	@Autowired
 	private MqService mqService;
