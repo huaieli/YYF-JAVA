@@ -21,7 +21,7 @@ public class MqController {
 
 	/**
 	 * 测试向MQ发送消息(Queus模式)
-	 * 地址：localhost:8080/MQ/jms/queues.do
+	 * 地址：localhost:8080/MQ/activeMQ/queues.do
 	 * @return
 	 * @throws Exception
 	 */
@@ -34,7 +34,7 @@ public class MqController {
 	
 	/**
 	 * 测试向MQ发送消息(Topic模式)
-	 * 地址：localhost:8080/MQ/jms/topic.do
+	 * 地址：localhost:8080/MQ/activeMQ/topic.do
 	 * @return
 	 * @throws Exception
 	 */
