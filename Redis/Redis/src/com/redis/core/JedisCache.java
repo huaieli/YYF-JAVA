@@ -1,4 +1,4 @@
-package com.redis.test;
+package com.redis.core;
 
 import java.util.Set;
 
@@ -8,10 +8,9 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.stereotype.Service;
 
 import redis.clients.jedis.Jedis;
-
 @Service
-public class RedisService {
-	private RedisService() {
+public class JedisCache {
+	private JedisCache() {
 		System.out.println("service");
 	}
 
