@@ -155,6 +155,24 @@ public class BaseSQL<T extends Po> {
 	}
 
 	/**
+	 * 数据库查询操作 查询实体类数据库所有的信息
+	 * 注：有flag为0限制
+	 * @param t
+	 * @return
+	 * @throws Exception
+	 */
+	public String baseSelectAll(T t) throws Exception {
+		String tableName = this.sc.getTableName(t);
+		Pram pram = this.sc.getPrimaryName(t);
+		if (pram == null) {
+			throw new Exception("实体类无查询条件数据！");
+		}
+		String sql = "select * from " + tableName + " where flag ='0'" ;
+		System.out.println(sql);
+		return sql;
+	}
+
+	/**
 	 * 数据库查询操作 根据实体类的值进行绝对查询 注：无时间大小比较
 	 * 
 	 * @param t
@@ -211,26 +229,25 @@ public class BaseSQL<T extends Po> {
 	}
 
 	/**
-	 * 用于获取code操作 进行了数据库比较操作 
-	 * 注：人为定义code格式 
-	 * 注：实体T数据库code字段必须要有@iscode注解 此注解的value值为Code头部
-	 * 注：实体T数据库必须有@Tabel注解
+	 * 用于获取code操作 进行了数据库比较操作 注：人为定义code格式 注：实体T数据库code字段必须要有@iscode注解
+	 * 此注解的value值为Code头部 注：实体T数据库必须有@Tabel注解
+	 * 
 	 * @param t
 	 * @return
 	 * @throws Exception
 	 */
-	public Map<String,String> baseGetCode(T t) throws Exception {
+	public Map<String, String> baseGetCode(T t) throws Exception {
 		String tableName = this.sc.getTableName(t);
-		Map<String,String> cm = this.sc.getCodeMess(t);
-		Map<String,String> rm =new HashMap<String, String>();
+		Map<String, String> cm = this.sc.getCodeMess(t);
+		Map<String, String> rm = new HashMap<String, String>();
 		String date = DateUtils.getStringDateShort().replaceAll("-", "")
 				.substring(2, 6);
-		date =  cm.get("type")+ date;
-		String sql = "select max(" + cm.get("name") + ") from " + tableName + " where "
-				+ cm.get("name") + " like '" + date + "%'";
+		date = cm.get("type") + date;
+		String sql = "select max(" + cm.get("name") + ") from " + tableName
+				+ " where " + cm.get("name") + " like '" + date + "%'";
 		rm.put("sql", sql);
-		rm.put("date",date);
-		rm.put("type",cm.get("type"));
+		rm.put("date", date);
+		rm.put("type", cm.get("type"));
 		return rm;
 	}
 

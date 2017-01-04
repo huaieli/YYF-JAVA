@@ -42,4 +42,8 @@
 	<select id="baseGetCode" resultType="String">
 	${sql}
 	</select>
+	
+	<select id="baseSelectAll" resultType="hashmap">
+	${sql}
+	</select>
 </mapper>

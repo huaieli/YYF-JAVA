@@ -21,5 +21,7 @@ public interface BaseDao<T> {
 	public List<Map<String, Object>> baseSelectLike(@Param("sql") String sql);
 
 	public String baseGetCode(@Param("sql") String sql);
+	
+	public List<Map<String,Object>> baseSelectAll(@Param("sql") String sql);
 
 }
