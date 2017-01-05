@@ -8,12 +8,16 @@ import com.framework.core.annotation.TempField;
 
 /**
  * 用户Bean
- * 
+ * Parimary 定义的有唯一性字段
+ * Code 编码字段 一般是系统在插入时生成 如 U17010001（编码头 年 月 计数字段）
+ * TempField 非数据库字段（在CRUD中会将其忽略）
  * @author yyf
  * 
  */
 @TableName(name = "user")
 public class User extends BaseEntity {
+	private int id;
+	
 	/**
 	 * 用户名 /唯一
 	 */
@@ -84,6 +88,20 @@ public class User extends BaseEntity {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "User [age=" + age + ", code=" + code + ", id=" + id + ", name="
+				+ name + ", phone=" + phone + ", remark=" + remark + "]";
 	}
 
 }

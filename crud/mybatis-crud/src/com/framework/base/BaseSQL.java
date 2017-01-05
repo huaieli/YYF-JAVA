@@ -163,10 +163,6 @@ public class BaseSQL<T extends Po> {
 	 */
 	public String baseSelectAll(T t) throws Exception {
 		String tableName = this.sc.getTableName(t);
-		Pram pram = this.sc.getPrimaryName(t);
-		if (pram == null) {
-			throw new Exception("实体类无查询条件数据！");
-		}
 		String sql = "select * from " + tableName + " where flag ='0'" ;
 		System.out.println(sql);
 		return sql;
