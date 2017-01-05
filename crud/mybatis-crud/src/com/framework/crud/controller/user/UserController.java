@@ -43,7 +43,7 @@ public class UserController extends BaseController<User, UserService> {
 		} catch (Exception e) {
 			//model 异常抛出操作
 		}
-		return "redirect:/user/all.do";
+		return "redirect:/user/get.do";
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class UserController extends BaseController<User, UserService> {
 		} catch (Exception e) {
 			//model 异常抛出操作
 		}
-		return "redirect:/user/all.do";
+		return "redirect:/user/get.do";
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class UserController extends BaseController<User, UserService> {
 		} catch (Exception e) {
 			//model 异常抛出操作
 		}
-		return "redirect:/user/all.do";
+		return "redirect:/user/get.do";
 	}
 
 	/**

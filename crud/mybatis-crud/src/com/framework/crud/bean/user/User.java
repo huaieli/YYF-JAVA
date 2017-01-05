@@ -7,6 +7,8 @@ import com.framework.core.annotation.TableName;
 import com.framework.core.annotation.TempField;
 
 /**
+ * @author yyf
+ * 
  * 用户Bean
  * Parimary 定义的有唯一性字段
  * Code 编码字段 一般是系统在插入时生成 如 U17010001（编码头 年 月 计数字段）
@@ -14,6 +16,7 @@ import com.framework.core.annotation.TempField;
  * @author yyf
  * 
  */
+
 @TableName(name = "user")
 public class User extends BaseEntity {
 	private int id;

@@ -443,8 +443,7 @@ public class SqlCore<T extends Po> {
 		}
 	}
 
-	/**
-	 * 鑾峰彇瀹炰綋绫讳腑鐨勬煇涓??
+	/** getFileValue
 	 * 
 	 * @param po
 	 * @param fileName
@@ -465,7 +464,7 @@ public class SqlCore<T extends Po> {
 	}
 
 	/**
-	 * 鍙栧瓧娈靛悕
+	 * getFileValue
 	 * 
 	 * @param po
 	 * @param fileName

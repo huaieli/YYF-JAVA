@@ -10,6 +10,14 @@ import org.springframework.stereotype.Service;
 import com.framework.core.domain.Core;
 import com.framework.util.NumberFormat;
 
+/**
+ * MYBATIS CURD BaseService 
+ * 一些增删改查的封装
+ * @author yyf
+ * 
+ * @param <T>
+ * @param <D>
+ */
 @Service
 public class BaseService<T extends BaseEntity, D extends BaseDao<T>> {
 
@@ -119,16 +127,16 @@ public class BaseService<T extends BaseEntity, D extends BaseDao<T>> {
 	}
 
 	/**
-	 * 数据库查询操作 查询实体类数据库所有的信息
-	 * 注：有flag为0限制
+	 * 数据库查询操作 查询实体类数据库所有的信息 注：有flag为0限制
+	 * 
 	 * @param t
 	 * @return
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public List<T> baseSelectAll(T t) throws Exception{
-		List<Map<String, Object>> maps = dao.baseSelectAll(BaseSQL.getInstance()
-				.baseSelectAll(t));
+	public List<T> baseSelectAll(T t) throws Exception {
+		List<Map<String, Object>> maps = dao.baseSelectAll(BaseSQL
+				.getInstance().baseSelectAll(t));
 		List<Object> os = Core.ML2PL(maps, t);
 		List<T> ts = new ArrayList<T>();
 		for (int i = 0; i < os.size(); i++) {
@@ -136,8 +144,7 @@ public class BaseService<T extends BaseEntity, D extends BaseDao<T>> {
 		}
 		return ts;
 	}
-	
-	
+
 	/**
 	 * 数据库查询操作 根据实体类的值进行模糊查询 注：无时间大小比较
 	 * 

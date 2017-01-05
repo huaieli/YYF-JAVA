@@ -5,6 +5,12 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+/**
+ * MYBATIS CRUD BaseDao
+ * @author yyf
+ *
+ * @param <T>
+ */
 public interface BaseDao<T> {
 	public boolean baseSave(@Param("sql") String sql);
 

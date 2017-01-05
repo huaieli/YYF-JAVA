@@ -9,6 +9,13 @@ import com.framework.core.domain.Pram;
 import com.framework.core.domain.SqlCore;
 import com.framework.util.DateUtils;
 
+/**
+ * CURD SQL拼接操作类
+ * 
+ * @author yyf
+ *
+ * @param <T>
+ */
 public class BaseSQL<T extends Po> {
 
 	private SqlCore<?> sc;
